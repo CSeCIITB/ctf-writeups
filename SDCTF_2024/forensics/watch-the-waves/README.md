@@ -31,7 +31,7 @@ def image_to_wav(image_path, output_path, sample_rate=44100):
     except IOError:
         print(f"Error: Could not open or read the image file: {image_path}")
         sys.exit(1)
-    except Exception as e:
+    Except Exception as e:
         print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
@@ -75,16 +75,19 @@ if __name__ == "__main__":
 
 Which gives an audio file with a lot of noise:
 
-<audio controls><source src="output_blurred.wav" type="audio/mpeg"></audio>
+https://github.com/user-attachments/assets/47131a71-bdeb-4f94-9bd3-d75887d13aa6
 
 To reduce the noise, I tried filtering the image with RED and GREEN filters (not blue, as the image's majority noise was from the blue part, clearly)
 
 **RED:**
 
-<audio controls><source src="output_RED.wav" type="audio/mpeg"></audio>
+https://github.com/user-attachments/assets/695c6453-b8a0-4db0-a03e-0c649b5cdc44
 
 **GREEN:**
 
-<audio controls><source src="output_GREEN.wav" type="audio/mpeg"></audio>
+https://github.com/user-attachments/assets/5c611d59-d909-48dc-977c-c4f8e6326606
 
-Which gives out the flag as **`sdctf{l3tsg02th3b34ch}`**
+Which gives out the flag as **`sdctf{l3tsg02th3b34ch}`**.
+
+> [!NOTE]
+> I have converted the `wav` files into `mp4` files and added them to the README so that the Markdown renderer can display them properly.
