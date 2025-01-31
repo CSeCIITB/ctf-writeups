@@ -358,5 +358,36 @@ After this point during the CTF we reshuffled the letters to form meaningful wor
 <p align='center'>
 <img src='note4.png' width=400 height=450>
 </p>
-
 The hex that the note refers to is of course the color of the ghosts. Also from note 3 we know that arranging the colors in their decreasing order of Alpha values (opacity) will give us the correct ordering of the flag chunks.
+
+### Bunker
+
+We are provided with two files. runinng file on them reveals
+- Bunker_DB: Keepass password database 2.x KDBX
+- Bunker_DMP: Mini DuMP crash report, 17 streams, Sun Nov 17 22:47:09 2024, 0x621826 type
+
+Keepass is a common password manager. The database is password protected. So one might try to fine the password of the database using the memory dump provided.
+
+A little bit of googling reveals the following tool:
+[keepass-dump-extractor](https://github.com/JorianWoltjer/keepass-dump-extractor)
+<p align='center'>
+<img src='keepass-password-dumper.png' width=800 height=500>
+</p>
+
+It only works for older versions of keepass but let us try it out
+
+Running it on the filedump results in the following candidates for password. 
+<p align='center'>
+<img src='extracted_passwords.png' width=800 height=500>
+</p>
+
+Using the password: gL0Ry_2_M4nk1Nd!_Y0RH4
+(Can be bruteforced but easy to guess from wordlist)
+We can unlock the database. There seems to be only one entry in the recycle bin though the password is redacted.
+<p align='center'>
+<img src='redacted_passwd.png' width=800 height=500>
+</p>
+But looking into the history of the entry (Or saving an unencrypted databse and running strings on it). We can find the flag.
+<p align='center'>
+<img src='true_passwd.png' width=800 height=500>
+</p>
