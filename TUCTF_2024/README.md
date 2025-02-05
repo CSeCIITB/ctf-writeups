@@ -391,3 +391,45 @@ But looking into the history of the entry (Or saving an unencrypted databse and 
 <p align='center'>
 <img src='true_passwd.png' width=800 height=500>
 </p>
+
+### Files in the Web
+
+> [Attatchment](files_in_web.zip)
+
+In thie challenge we are provided with the following files
+
+- tornadologs.evtx: MS Windows Vista Event Log,
+- Some text files
+
+Opening the event log in an appropriate viewer (google helps)
+we can see the following logs:
+
+<p align='center'>
+<img src='files_in_the_web.png' width=800 height=500>
+</p>
+
+From this we can interpret that the file nzosdanrot.txt was encrypted using the key provided.
+
+The contents of this file are the following:
+
+gAAAAABnSr5MS-gH-RLqtV1ltw_hBuwujvt6S-Ku3pOdgSpAiby55EGOI3JMpv3JX6ptlhnC8cT4UdfqiIck6RDgobhASUKPJlZMkV0Js82Xx-kIHKywirHeGBqKQimJ672sPnbeWL1e
+
+
+Here the prefix gAAAA indicates that the file was encrypted using fernet encryption. So it can be decrypted simply as follows:
+
+```python
+from cryptography.fernet import Fernet
+
+key = b"UIYfpIrqvzvTedjR1qFm66K1MYYlwNgUQlgpZPfLs3k="
+encrypted_data = b"gAAAAABnSr5MS-gH-RLqtV1ltw_hBuwujvt6S-Ku3pOdgSpAiby55EGOI3JMpv3JX6ptlhnC8cT4UdfqiIck6RDgobhASUKPJlZMkV0Js82Xx-kIHKywirHeGBqKQimJ672sPnbeWL1e"
+
+f = Fernet(key)
+decrypted_data = f.decrypt(encrypted_data)
+print(decrypted_data.decode("utf-8"))
+
+```
+
+<p align='left'>
+<img src='flag_final_files.png'>
+</p>
+
